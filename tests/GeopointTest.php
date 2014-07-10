@@ -18,5 +18,4 @@ class GeopointTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($latitude, $point->getLatitude());
         $this->assertEquals($longitude, $point->getLongitude());
     }
-
 }

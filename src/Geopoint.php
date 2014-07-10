@@ -1,6 +1,6 @@
 <?php
 
-namespace \WeeJames\Geotools;
+namespace WeeJames\Geotools;
 
 class Geopoint
 {
@@ -10,13 +10,13 @@ class Geopoint
     private $longitude;
 
     // available units
-    public static GEO_UNIT_KM = 'km';
-    public static GEO_UNIT_MILES = 'miles';
+    public static $GEO_UNIT_KM = 'km';
+    public static $GEO_UNIT_MILES = 'miles';
 
 
     // available algorithms
-    public static ALGORITHM_FLAT = 'flat';
-    public static ALGORITHM_HAVERSINE = 'haversine';
+    public static $ALGORITHM_FLAT = 'flat';
+    public static $ALGORITHM_HAVERSINE = 'haversine';
 
     // stores the current operation taking place
     public $currentOperation;
@@ -26,7 +26,7 @@ class Geopoint
 
     // target point
 
-    public function __construct($latitude, $Longitude)
+    public function __construct($latitude, $longitude)
     {
         $this->latitude = $latitude;
         $this->longitude = $longitude;
@@ -53,11 +53,11 @@ class Geopoint
 
     public function getLatitude()
     {
-
+        return $this->latitude;
     }
 
     public function getLongitude()
     {
-
+        return $this->longitude;
     }
 }

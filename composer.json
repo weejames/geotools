@@ -1,0 +1,32 @@
+{
+    "name": "weejames/geotools",
+    "type": "library",
+    "description" : "A lightweight set of tools for workign with geodata in PHP ",
+    "keywords": ["php", "geo", "goetools"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name" : "James Constable",
+            "email" : "weejames@gmail.com",
+            "homepage" : "https://github.com/weejames/",
+            "role" : "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=5.4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "~4.0",
+        "squizlabs/php_codesniffer": "2.0.*@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "WeeJames\\Geotools\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WeeJames\\Geotools\\Test\\": "tests"
+        }
+    }
+}

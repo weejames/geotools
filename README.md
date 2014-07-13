@@ -5,15 +5,17 @@ Geotools
 
 A library that provides some simple tools for working with location data.
 
+## Distance Calculations
+
 ```php
 $startPoint = new \WeeJames\Geotools\Geopoint(
-    $this->startLatitude,
-    $this->startLongitude
+    55.8580,
+    4.2590
 );
 
 $targetPoint = new \WeeJames\Geotools\Geopoint(
-    $this->targetLatitude,
-    $this->targetLongitude
+    40.7127,
+    74.0059
 );
 
 $distanceToTarget = $startPoint

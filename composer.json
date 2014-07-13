@@ -1,8 +1,8 @@
 {
     "name": "weejames/geotools",
     "type": "library",
-    "description" : "A lightweight set of tools for workign with geodata in PHP ",
-    "keywords": ["php", "geo", "goetools"],
+    "description" : "A lightweight set of tools for working with geodata in PHP.",
+    "keywords": ["php", "geo", "geotools"],
     "license": "MIT",
     "authors": [
         {

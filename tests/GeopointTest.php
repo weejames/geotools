@@ -42,13 +42,13 @@ class GeopointTest extends \PHPUnit_Framework_TestCase
             $this->startLongitude
         );
 
-        $startPoint->in(\WeeJames\Geotools\Geopoint::GEO_UNIT_KM);
+        $startPoint->in(\WeeJames\Geotools\Tools::GEO_UNIT_KM);
 
-        $this->assertEquals(\WeeJames\Geotools\Geopoint::GEO_UNIT_KM, $startPoint->getUnit());
+        $this->assertEquals(\WeeJames\Geotools\Tools::GEO_UNIT_KM, $startPoint->getUnit());
 
-        $startPoint->in(\WeeJames\Geotools\Geopoint::GEO_UNIT_MILES);
+        $startPoint->in(\WeeJames\Geotools\Tools::GEO_UNIT_MILES);
 
-        $this->assertEquals(\WeeJames\Geotools\Geopoint::GEO_UNIT_MILES, $startPoint->getUnit());
+        $this->assertEquals(\WeeJames\Geotools\Tools::GEO_UNIT_MILES, $startPoint->getUnit());
 
     }
 
@@ -82,12 +82,76 @@ class GeopointTest extends \PHPUnit_Framework_TestCase
             $this->startLongitude
         );
 
-        $startPoint->using(\WeeJames\Geotools\Geopoint::ALGORITHM_FLAT);
+        $startPoint->using(\WeeJames\Geotools\Tools::ALGORITHM_FLAT);
 
-        $this->assertEquals(\WeeJames\Geotools\Geopoint::ALGORITHM_FLAT, $startPoint->getAlgorithm());
+        $this->assertEquals(\WeeJames\Geotools\Tools::ALGORITHM_FLAT, $startPoint->getAlgorithm());
 
-        $startPoint->using(\WeeJames\Geotools\Geopoint::ALGORITHM_HAVERSINE);
+        $startPoint->using(\WeeJames\Geotools\Tools::ALGORITHM_HAVERSINE);
 
-        $this->assertEquals(\WeeJames\Geotools\Geopoint::ALGORITHM_HAVERSINE, $startPoint->getAlgorithm());
+        $this->assertEquals(\WeeJames\Geotools\Tools::ALGORITHM_HAVERSINE, $startPoint->getAlgorithm());
+    }
+
+
+    /**
+     * @test
+     */
+    public function canSetDistanceOperation()
+    {
+        $startPoint = new \WeeJames\Geotools\Geopoint(
+            $this->startLatitude,
+            $this->startLongitude
+        );
+
+        $startPoint->distance();
+
+        $this->assertEquals(\WeeJames\Geotools\Tools::DISTANCE_OPERATION, $startPoint->getOperation());
+    }
+
+    /**
+     * @test
+     */
+    public function distanceUsingFlatAlgorithm()
+    {
+        $startPoint = new \WeeJames\Geotools\Geopoint(
+            $this->startLatitude,
+            $this->startLongitude
+        );
+
+        $targetPoint = new \WeeJames\Geotools\Geopoint(
+            $this->targetLatitude,
+            $this->targetLongitude
+        );
+
+        $distanceToTarget = $startPoint
+                                ->distance()
+                                ->to($targetPoint)
+                                ->using(\WeeJames\Geotools\Tools::ALGORITHM_FLAT)
+                                ->is();
+
+        $this->assertEquals(6210.78, $distanceToTarget, '', 0.2);
+    }
+
+    /**
+     * @test
+     */
+    public function distanceUsingHaversineAlgorithm()
+    {
+        $startPoint = new \WeeJames\Geotools\Geopoint(
+            $this->startLatitude,
+            $this->startLongitude
+        );
+
+        $targetPoint = new \WeeJames\Geotools\Geopoint(
+            $this->targetLatitude,
+            $this->targetLongitude
+        );
+
+        $distanceToTarget = $startPoint
+                                ->distance()
+                                ->to($targetPoint)
+                                ->using(\WeeJames\Geotools\Tools::ALGORITHM_HAVERSINE)
+                                ->is();
+
+        $this->assertEquals(5181.45, $distanceToTarget, '', 0.2);
     }
 }

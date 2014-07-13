@@ -4,15 +4,6 @@ namespace WeeJames\Geotools;
 
 class Geopoint
 {
-    // available units
-    const GEO_UNIT_KM = 'km';
-    const GEO_UNIT_MILES = 'miles';
-
-
-    // available algorithms
-    const ALGORITHM_FLAT = 'flat';
-    const ALGORITHM_HAVERSINE = 'haversine';
-
     // coordinates of this point
     private $latitude;
     private $longitude;
@@ -31,9 +22,26 @@ class Geopoint
 
     public function __construct($latitude, $longitude)
     {
-        $this->currentUnit = self::GEO_UNIT_KM;
+        $this->currentUnit = \WeeJames\Geotools\Tools::GEO_UNIT_KM;
         $this->latitude = $latitude;
         $this->longitude = $longitude;
+    }
+
+    /**
+     *
+     */
+    public function is()
+    {
+        switch ($this->currentOperation) {
+            case \WeeJames\Geotools\Tools::DISTANCE_OPERATION:
+                return \WeeJames\Geotools\Tools::distanceBetween(
+                    $this,
+                    $this->targetGeopoint,
+                    $this->currentAlgorithm,
+                    $this->currentUnit
+                );
+                break;
+        }
     }
 
 
@@ -42,7 +50,8 @@ class Geopoint
      */
     public function distance()
     {
-
+        $this->currentOperation = \WeeJames\Geotools\Tools::DISTANCE_OPERATION;
+        return $this;
     }
 
     public function in($unit)
@@ -86,5 +95,10 @@ class Geopoint
     public function getAlgorithm()
     {
         return $this->currentAlgorithm;
+    }
+
+    public function getOperation()
+    {
+        return $this->currentOperation;
     }
 }

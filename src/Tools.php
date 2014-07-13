@@ -2,7 +2,8 @@
 
 namespace WeeJames\Geotools;
 
-class Tools {
+class Tools
+{
     // available units
     const GEO_UNIT_KM = 'km';
     const GEO_UNIT_MILES = 'miles';
@@ -20,41 +21,37 @@ class Tools {
     public static function distanceBetween(Geopoint $pointA, Geopoint $pointB, $algorithm, $units)
     {
         switch ($algorithm) {
-			case 'haversine':
-				$theta = ($pointA->getLongitude() - $pointB->getLongitude());
-
-				$dist = sin(
-                            deg2rad($pointA->getLatitude())
-                            ) *
-                        sin(
-                            deg2rad($pointB->getLatitude())
-                            ) +
-                            cos(deg2rad($pointA->getLatitude())
-                            ) *
-                        cos(
-                            deg2rad($pointB->getLatitude())
-                            ) *
-                        cos(
-                            deg2rad($theta)
-                        );
-
+            case 'haversine':
+                $theta = ($pointA->getLongitude() - $pointB->getLongitude());
+                $dist = sin(
+                    deg2rad($pointA->getLatitude())
+                ) *
+                sin(
+                    deg2rad($pointB->getLatitude())
+                ) +
+                   cos(
+                       deg2rad($pointA->getLatitude())
+                   ) *
+                cos(
+                    deg2rad($pointB->getLatitude())
+                ) *
+                cos(
+                    deg2rad($theta)
+                );
                 $dist = acos($dist);
-
-				$distance = rad2deg($dist);
-			break;
-			case 'flat':
-			default:
-				$distanceEW = ($pointB->getLongitude() - $pointA->getLongitude()) *
-                    cos($pointA->getLatitude());
-				$distanceNS = $pointB->getLatitude() - $pointA->getLatitude();
-
-				$distance = sqrt(
+                $distance = rad2deg($dist);
+                break;
+            case 'flat':
+            default:
+                $distanceEW = ($pointB->getLongitude() - $pointA->getLongitude()) *
+                cos($pointA->getLatitude());
+                $distanceNS = $pointB->getLatitude() - $pointA->getLatitude();
+                $distance = sqrt(
                     ($distanceEW * $distanceEW) +
                     ($distanceNS * $distanceNS)
                 );
-
-			break;
-		}
+                break;
+        }
 
         switch($units) {
             case self::GEO_UNIT_KM:
@@ -65,9 +62,8 @@ class Tools {
                 break;
         }
 
-		$distance *= 2 * pi() * $radius / 360.0;
+        $distance *= 2 * pi() * $radius / 360.0;
 
-		return $distance;
+        return $distance;
     }
-
 }

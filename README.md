@@ -24,3 +24,15 @@ $distanceToTarget = $startPoint
                         ->using(\WeeJames\Geotools\Tools::ALGORITHM_HAVERSINE)
                         ->is();
 ```
+
+### Available algorithms
+
+Haversine `\WeeJames\Geotools\Tools::ALGORITHM_HAVERSINE` (Most accurate)
+
+Flat (default) `\WeeJames\Geotools\Tools::ALGORITHM_FLAT` (Faster, but loses accuracy over long distances)
+
+### Available units
+
+Kilometers `\WeeJames\Geotools\Tools::GEO_UNIT_KM`
+
+Miles `\WeeJames\Geotools\Tools::GEO_UNIT_MILES`
